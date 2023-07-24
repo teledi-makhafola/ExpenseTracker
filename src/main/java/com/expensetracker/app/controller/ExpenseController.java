@@ -1,5 +1,6 @@
 package com.expensetracker.app.controller;
 
+import com.expensetracker.app.model.BudgetSummary;
 import com.expensetracker.app.model.Expense;
 import com.expensetracker.app.service.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,11 @@ public class ExpenseController {
     public ResponseEntity<Void> deleteExpense(@PathVariable Long id) {
         expenseService.deleteExpense(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/budget-summary")
+    public ResponseEntity<BudgetSummary> getBudgetSummary(@RequestParam double totalBudget) {
+        BudgetSummary budgetSummary = expenseService.calculateBudgetSummary(totalBudget);
+        return ResponseEntity.ok(budgetSummary);
     }
 }
