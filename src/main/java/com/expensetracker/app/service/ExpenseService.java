@@ -5,6 +5,7 @@ import com.expensetracker.app.model.Expense;
 import com.expensetracker.app.repository.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.persistence.Id;
 import java.util.List;
 
 public class ExpenseService {
@@ -42,6 +43,12 @@ public class ExpenseService {
         boolean isUnderBudget = savings >= 0;
 
         BudgetSummary budgetSummary = new BudgetSummary(totalBudget, totalExpenses, savings, isUnderBudget);
+        budgetSummary.getTotalBudget();
+        budgetSummary.getTotalExpenses();
+        budgetSummary.getSavings();
+        budgetSummary.isUnderBudget();
+        expenseRepository.save(budgetSummary);
+
         return budgetSummary;
     }
 }
